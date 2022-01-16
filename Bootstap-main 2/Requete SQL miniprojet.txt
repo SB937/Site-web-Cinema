@@ -1,0 +1,38 @@
+﻿Requete pour avoir le film en fonction du genre:
+
+SELECT * FROM miniprojet.film inner join miniprojet.genre where Genre_idGenre=idGenre;
+
+Requete 
+
+Requete des ajouter des films :
+
+INSERT INTO `film` (`idFilm`, `titre`, `annee`, `resume`, `Artiste_idRealisateur`, `Genre_idGenre`) VALUES ('5', 'G', '22', NULL, '6', '1');
+
+Requete pour supprimer des films:
+
+DELETE FROM `film` WHERE `film`.`idFilm` = 100
+
+Requete pour ajouter des internautes:
+
+INSERT INTO `internaute` (`idInternaute`,`nom`) values ('3','Silly')
+
+Requete pour supprimer des internautes:
+
+DELETE FROM `internaute` WHERE `internaute`.`idInternaute` = 3
+
+Requete pour ajouter des notes:
+
+INSERT INTO `noter` (`Internaute_idInternaute`, `Film_idFilm`) VALUES ('3', '9'); Attention pour noter un film il faut qu'un internaute existe déjà
+
+Requete pour supprimer des notes:
+
+DELETE FROM `noter` WHERE `noter`.`Internaute_idInternaute` = 3 AND `noter`.`Film_idFilm` = 9 
+
+Requete pour voir quelles internaute à noter quelle film:
+SELECT `nom`,`titre`,`notes` FROM internaute inner join film on idInternaute=idFilm inner join noter on idFilm=Film_idFilm
+
+
+
+
+
+
