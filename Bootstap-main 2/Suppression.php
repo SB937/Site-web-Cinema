@@ -5,7 +5,7 @@ session_start();
 if($_GET['genre']=="film"){
 //connexion bdd
     try {
-        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+        $bdd = new PDO('mysql:host=localhost;dbname=miniprojet', 'root', '');
     } catch (Exception $e) {
         die('Erreur de connexion : ' . $e->getMessage());
     }
@@ -17,7 +17,7 @@ if($_GET['genre']=="film"){
 if($_GET['genre']=="genre"){
 //connexion bdd
     try {
-        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+        $bdd = new PDO('mysql:host=localhost;dbname=miniprojet', 'root', '');
     } catch (Exception $e) {
         die('Erreur de connexion : ' . $e->getMessage());
     }
@@ -32,7 +32,7 @@ if($_GET['genre']=="genre"){
 if($_GET['genre']=="internautes"){
 //connexion bdd
     try {
-        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+        $bdd = new PDO('mysql:host=localhost;dbname=miniprojet', 'root', '');
     } catch (Exception $e) {
         die('Erreur de connexion : ' . $e->getMessage());
     }
@@ -40,18 +40,4 @@ if($_GET['genre']=="internautes"){
     $req->execute([$id]) or die(print_r($req->errorInfo()));
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if($_GET['genre']=="artiste"){
-//connexion bdd
-    try {
-        $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
-    } catch (Exception $e) {
-        die('Erreur de connexion : ' . $e->getMessage());
-    }
-    $req = $bdd->prepare('DELETE FROM film WHERE (Artiste_idRealisateur = ?);');
-    $req->execute([$id]) or die(print_r($req->errorInfo()));
-
-    $requete = $bdd->prepare('DELETE FROM artiste WHERE (idArtiste = ?);');
-    $requete->execute([$id]) or die(print_r($requete->errorInfo()));
-
-}
    header('Location: Admin.php');
