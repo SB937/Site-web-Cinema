@@ -39,15 +39,19 @@ if($_GET['action']==="film"){echo '<div>
                 <td><label>Annee</label></td> <td><input type="text" name="annee"/></td>
             </tr>
             <tr>
+                <td><label>Image</label></td> <td><input type="text" name="image"/></td>
+            </tr>
+            <tr>
                 <td><label>Genre</label></td>
                 <td ><select name="genre">';
+
 
     try{
         $bdd = new PDO('mysql:host=localhost;dbname=miniprojet','root','');
     }
     catch(Exception $e){
         die('Erreur de connexion : '.$e->getMessage());}
-    $rep = $bdd->query('SELECT * FROM cinema.genre;');
+    $rep = $bdd->query('SELECT * FROM genre;');
     while($donnee = $rep->fetch())
     {
         echo('<option name="genre" value="'.$donnee['idGenre'].'">'.$donnee['libelle'].'</option>');
@@ -64,7 +68,7 @@ if($_GET['action']==="film"){echo '<div>
     }
     catch(Exception $e){
         die('Erreur de connexion : '.$e->getMessage());}
-    $rep = $bdd->query('SELECT * FROM cinema.artiste;');
+    $rep = $bdd->query('SELECT * FROM artiste;');
     while($donnee = $rep->fetch())
     {
         echo('<option name="artiste" value="'.$donnee['idArtiste'].'">'.$donnee['prenom'].' '.$donnee['nom'].'</option>');
@@ -81,15 +85,16 @@ if($_GET['action']==="film"){echo '<div>
         $annee=$_POST['annee'];
         $Artiste=$_POST['artiste'];;
         $Genre=$_POST['genre'];
+        $Image=$_POST['image'];
 
             try {
-                $bdd = new PDO('mysql:host=localhost;dbname=cinema', 'root', '');
+                $bdd = new PDO('mysql:host=localhost;dbname=miniprojet', 'root', '');
             } catch (Exception $e) {
                 die('Erreur de connexion : ' . $e->getMessage());
             }
 //preparation de la requête avec les variables $_POST du formulaire
-            $req = $bdd->prepare('INSERT INTO film (titre, annee, Artiste_idRealisateur, Genre_idGenre) VALUES (?,?, ?,?);');
-            $req->execute([$titre,$annee,$Artiste,$Genre]) or die(print_r($req->errorInfo()));
+            $req = $bdd->prepare('INSERT INTO film (titre, annee, Artiste_idRealisateur, Genre_idGenre,Image) VALUES (?,?, ?,?,?);');
+            $req->execute([$titre,$annee,$Artiste,$Genre,$Image]) or die(print_r($req->errorInfo()));
             header('Location: Admin.php');
         }
 }
