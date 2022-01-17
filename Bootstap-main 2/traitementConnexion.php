@@ -25,6 +25,8 @@ try{
         case '0'		:	//Redirection vers index.php
             $_SESSION['admin']=0;
             $_SESSION['donnee'] = $donnee;
+            $_SESSION['email']= $donnee['email'];
+            echo $_SESSION['email'];
             header('Location: Index.php');
             break;
 
